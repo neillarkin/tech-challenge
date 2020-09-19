@@ -1,0 +1,14 @@
+{% extends 'base.html' %} 
+{% set page_title = 'TrueLayer Challenge' %}
+{% block content %}
+
+
+<form action="{{ url_for('pokemon') }}" method="get">
+    <input class="form-control" type="search" name="search" placeholder="Search" aria-label="Search">
+    <button class="btn" type="submit"> Search </button>
+</form>
+
+{{ species_url }}
+{{ data }}
+
+{% endblock %}
