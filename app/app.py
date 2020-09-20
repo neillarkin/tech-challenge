@@ -1,13 +1,11 @@
 import os
-from flask import Flask, render_template, request, url_for
+from flask import Flask, flash, request, render_template, url_for, jsonify, redirect
 import requests, json
 
 app = Flask(__name__)
-
 POKEMON_API_URL = "https://pokeapi.co/api/v2/pokemon/"
 POKEMON_SPECIES_API_URL = "https://pokeapi.co/api/v2/pokemon-species/"
 TRANSLATION_API_URL = "https://api.funtranslations.com/translate/shakespeare.json?text="
-
 
 @app.route('/')
 def index():
@@ -36,7 +34,9 @@ def pokemon():
             dict.clear()
             dict = query_response.json()
             description = getDescription(dict['flavor_text_entries'])
-            
+            translation_param = {'text': str(description)}
+            translation = postTranslation(translation_param)
+            # translation = "This is temporary text"
     return render_template('index.html', placeholder=placeholder, description=description, translation=translation)
 
 
@@ -45,6 +45,20 @@ def getDescription(flavor_text_entries):
         if entry['language']['name'] == 'en':
             description = entry['flavor_text']
             return description
+
+
+@app.route('/shakespeare', methods=['POST'])
+def postTranslation(text):
+    query_response = requests.post(TRANSLATION_API_URL, data=text)
+    if query_response.status_code == 429:
+        dict = query_response.json()
+        text = dict['placeholder']['message']
+        return text
+    else:
+        dict = query_response.json()
+        text = dict['contents']['translated']
+        return text
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
