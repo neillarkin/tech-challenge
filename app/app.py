@@ -1,6 +1,7 @@
 import os
-from flask import Flask, flash, request, render_template, url_for, jsonify, redirect
+from flask import Flask, flash, request, render_template, url_for
 import requests, json
+from tests import *
 
 app = Flask(__name__)
 POKEMON_API_URL = "https://pokeapi.co/api/v2/pokemon/"
@@ -64,3 +65,18 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
+
+
+#########################
+####### TESTS ###########
+#########################
+
+# Tests if Pokeapi.co is responding
+def testConnection(name):
+    url = POKEMON_API_URL + name
+    response = requests.get(url)
+    status = str(response.status_code)
+    return status
+
+test_are_equal(testConnection('ditto'),'200' )
+test_not_equal(testConnection('ditto'),'500' )
