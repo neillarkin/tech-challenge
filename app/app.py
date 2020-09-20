@@ -15,30 +15,36 @@ def index():
 
 @app.route('/pokemon', methods=['GET', 'POST'])
 def pokemon():
-    error = None
+    placeholder = None
+    translation = None
     description = None
-    query = request.args['search']
+    query = request.args['search'].lower()
     query_url = POKEMON_API_URL + query
 
     if not query:
-        error = "Enter a character name"
-    elif query:
+        placeholder = "Enter a character name"
+
+    if query:
         query_response = requests.get(query_url)
         if query_response.status_code != 200:
-            error = str(query_response.status_code) + " Nothing Found"
+            placeholder = str(query_response.status_code) + " Nothing Found"
         else:
             dict = query_response.json()
-            error = str(dict['name'])
-            query_url = POKEMON_SPECIES_API_URL + error
+            placeholder = str(dict['name'])
+            query_url = POKEMON_SPECIES_API_URL + placeholder
             query_response = requests.get(query_url)
             dict.clear()
             dict = query_response.json()
-            flavor_entries = dict['flavor_text_entries']
-            flavor_text = flavor_entries[0]
-            description = str(flavor_text['flavor_text'])
+            description = getDescription(dict['flavor_text_entries'])
+            
+    return render_template('index.html', placeholder=placeholder, description=description, translation=translation)
 
-    return render_template('index.html', error=error, description=description)
 
+def getDescription(flavor_text_entries):
+    for entry in flavor_text_entries:        
+        if entry['language']['name'] == 'en':
+            description = entry['flavor_text']
+            return description
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
