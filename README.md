@@ -7,6 +7,7 @@ The app was created with Python and Flask on Windows 10 in Visual Studio Code.
 
 #### (See below for information on install requirements.)
 
+_____________________________________________________________
 
 #### Part 1 (Answer)
 
@@ -20,34 +21,34 @@ Hope this helps clarify things. Let me know if you need any more information.
 
 Neil
 
-======================================================================================
+____________________________________________________________
 
 
-
+## Local setup
 If you need to create it locally, below are commands for Win/Unix systems.
 
-1. To create a virtual enviroment folder
+1. Create a virtual enviroment folder
     #### macOS/Linux
-    sudo apt-get install python3-venv 
-    python3 -m venv env
+    * sudo apt-get install python3-venv 
+    * python3 -m venv env
 
     #### Windows
-    python -m venv env
+    * python -m venv env
 
-2. Install Flask and requests
+2. Install Flask and install Requests
     #### macOS/Linux
-    pip3 install flask
-    pip3 install requests
+    * pip3 install flask
+    * pip3 install requests
 
     #### Windows
-    pip install flask
-    pip install requests
+    * pip install flask
+    * pip install requests
 
 3. Run the app
     #### macOS/Linux
-    $ export FLASK_APP=app.py
-    $ flask run
+    * $ export FLASK_APP=app.py
+    * $ flask run
 
     #### Windows
-    C:\path\to\app>set FLASK_APP=app.py
-    flask run
+    * C:\path\to\app>set FLASK_APP=app.py
+    * flask run
