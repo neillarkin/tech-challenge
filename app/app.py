@@ -36,8 +36,8 @@ def pokemon():
             dict = query_response.json()
             description = getDescription(dict['flavor_text_entries'])
             translation_param = {'text': str(description)}
-            translation = postTranslation(translation_param)
-            # translation = "This is temporary text"
+            # translation = postTranslation(translation_param)
+            translation = "This is temporary text"
     return render_template('index.html', placeholder=placeholder, description=description, translation=translation)
 
 
