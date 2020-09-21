@@ -12,6 +12,8 @@ TRANSLATION_API_URL = "https://api.funtranslations.com/translate/shakespeare.jso
 def index():
     return render_template('index.html')
 
+
+"""Search query is used to get JSON responses for both pokeapi URLS."""
 @app.route('/pokemon', methods=['GET', 'POST'])
 def pokemon():
     placeholder = None
@@ -36,11 +38,12 @@ def pokemon():
             dict = query_response.json()
             description = getDescription(dict['flavor_text_entries'])
             translation_param = {'text': str(description)}
-            # translation = postTranslation(translation_param)
-            translation = "This is temporary text"
+            translation = postTranslation(translation_param)
+            # translation = "This is temporary text to prevent 429 response"
     return render_template('index.html', placeholder=placeholder, description=description, translation=translation)
 
 
+""" Check if the JSON key value in English and return if true."""
 def getDescription(flavor_text_entries):
     for entry in flavor_text_entries:        
         if entry['language']['name'] == 'en':
@@ -48,6 +51,7 @@ def getDescription(flavor_text_entries):
             return description
 
 
+""" Send poekmon description to Shakespearean translator."""
 @app.route('/shakespeare', methods=['POST'])
 def postTranslation(text):
     query_response = requests.post(TRANSLATION_API_URL, data=text)
@@ -61,17 +65,7 @@ def postTranslation(text):
         return text
 
 
-if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'),
-            port=int(os.environ.get('PORT')),
-            debug=False)
-
-
-#########################
-####### TESTS ###########
-#########################
-
-# Tests if Pokeapi.co is responding
+""" Tests if Pokeapi.co is responding with either 200 or 500 codes """
 def testConnection(name):
     url = POKEMON_API_URL + name
     response = requests.get(url)
@@ -80,3 +74,9 @@ def testConnection(name):
 
 test_are_equal(testConnection('ditto'),'200' )
 test_not_equal(testConnection('ditto'),'500' )
+
+
+if __name__ == '__main__':
+    app.run(host=os.environ.get('IP'),
+            port=int(os.environ.get('PORT')),
+            debug=False)
