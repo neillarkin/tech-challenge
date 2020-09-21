@@ -3,17 +3,32 @@
 {% block content %}
 
 
-<form action="{{ url_for('pokemon') }}" method="get">
-    <input class="form-control" type="search" name="search" placeholder="Search" aria-label="Search">
-    <button class="btn" type="submit"> Search </button>
-</form>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+    <form class="form-inline" action="{{ url_for('pokemon') }}" method="get">
+      <input class="form-control mr-sm-2" type="search" name="search" placeholder="Type a Pokemon" aria-label="Search">
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <a class="navbar-brand">Pokemon Shakespearean Translator</a>
+</div>
+  </nav>
 
-<h5>{{ placeholder }}</h5>
-<br>
-<h5>Description</h5>{{ description }}
-<br>
-<br>
-<h5>Translation:</h5> {{ translation }}
+<div class="container">
 
-
+<div class="row row-cols-1 row-cols-md-9">
+    <div class="col">
+        <br>
+        <h4> <span class="display-4 text-capitalize">{{ placeholder }}</span></h4>
+        <br>
+        <br>
+        <div class="alert alert-light" role="alert">
+            <h4 class="alert-heading">Description:</h4>
+            <p>{{ description }}</p>
+        </div>
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Translation:</h4>
+            <p>{{ translation }}</p>
+        </div>
+    </div>
+</div></div>
 {% endblock %}

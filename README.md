@@ -1,21 +1,32 @@
-# tech-challenge  Notes for end-users
+This is a translator that allows users to search for a Pokemon character and see its desctiption in Shakspearean English.
 
-1 make env / Windows /Linux
-2 install Flask / Windows /Linux
-3 pip3 install requests
+The app was created with Python and Flask on Windows 10 in Visual Studio Code.
 
-Widnows: C:\tech-challenge\env\pyvenv.cfg   C:\tech-challenge\env\Scripts
+A working version of the app is available here https://truelayer-challenge.herokuapp.com/ but if you need to create it locally, below are commands for Win/Unix systems.
 
-Linux / Mac
-$ export FLASK_APP=app.py
-$ flask run
 
-Windows Command Prompt 
-C:\path\to\app>set FLASK_APP=app.py
-flask run
+1. To create a virtual enviroment folder
+    # macOS/Linux
+    sudo apt-get install python3-venv    # If needed
+    python3 -m venv env
 
-Windows PowerShell 
- export FLASK_APP=hello.py
-$ python -m flask run
+    # Windows
+    python -m venv env
 
-flask run --host=127.0.0.1:5000
+2. Install Flask and requests
+    # macOS/Linux
+    pip3 install flask
+    pip3 install requests
+
+    # Windows
+    pip install flask
+    pip install requests
+
+3. Run the app
+    # macOS/Linux
+    $ export FLASK_APP=app.py
+    $ flask run
+
+    # Windows
+    C:\path\to\app>set FLASK_APP=app.py
+    flask run
