@@ -57,7 +57,7 @@ def postTranslation(text):
     query_response = requests.post(TRANSLATION_API_URL, data=text)
     if query_response.status_code == 429:
         dict = query_response.json()
-        text = dict['placeholder']['message']
+        text = dict['error']['message']
         return text
     else:
         dict = query_response.json()
