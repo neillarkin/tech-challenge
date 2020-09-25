@@ -1,6 +1,6 @@
 # Tech Challenge 
 ## Pokemon Shakspearean Translator
-A translator that allows users to search for a Pokemon character and see its desctiption in Shakspearean English.
+A translator that allows users to search for a Pokemon character and translate its description to in Shakspearean English.
 The app was created with Python and Flask on Windows 10 in Visual Studio Code.
 
 #### A live version of the app is available here: https://truelayer-challenge.herokuapp.com/
